@@ -11,7 +11,7 @@ use POE qw(NFA);
 use Net::DNS::Packet;
 use vars qw($VERSION);
 
-$VERSION = '0.10';
+$VERSION = '0.12';
 
 my @hc_hints = qw(
 198.41.0.4
@@ -33,8 +33,6 @@ sub resolve {
   my $package = shift;
   my %opts = @_;
   $opts{lc $_} = delete $opts{$_} for keys %opts;
-  # Check for 'host'
-  # Check for 'event'
   croak "$package requires a 'host' argument\n"
 	unless $opts{host};
   croak "$package requires an 'event' argument\n"
@@ -53,6 +51,7 @@ sub resolve {
     ],
     hints   => [
 	$self => {
+	_init  => '_hints_go',
         _setup => '_send',
         _read  => '_hints',
         _timeout => '_hints_timeout',
@@ -108,6 +107,12 @@ sub _start {
         packet => Net::DNS::Packet->new($runstate->{host},$type,$class),
   };
   $runstate->{socket} = IO::Socket::INET->new( Proto => 'udp' );
+  $machine->goto_state( 'hints', '_init' );
+  return;
+}
+
+sub _hints_go {
+  my ($kernel,$machine,$runstate) = @_[KERNEL,MACHINE,RUNSTATE];
   my $hints;
   if ( scalar @{ $runstate->{nameservers} } ) {
      $hints = $runstate->{nameservers};
@@ -121,7 +126,7 @@ sub _start {
 }
 
 sub _send {
-  my ($machine,$runstate,$packet,$ns) = @_[MACHINE,RUNSTATE,ARG0,ARG1];
+  my ($machine,$runstate,$state,$packet,$ns) = @_[MACHINE,RUNSTATE,STATE,ARG0,ARG1];
   my $socket = $runstate->{socket};
   my $data = $packet->data;
   my $server_address;
@@ -138,7 +143,6 @@ sub _send {
      return;
   }
   $poe_kernel->select_read( $socket, '_read' );
-  # Timeout
   $poe_kernel->delay( '_timeout', $runstate->{timeout} || 5 );
   return;
 }
@@ -173,6 +177,10 @@ sub _hints {
   }
   $runstate->{hints} = \%hints;
   my @ns = _ns_from_cache( $runstate->{hints} );
+  unless ( scalar @ns ) {
+     $machine->goto_state( 'hints', '_init' );
+     return;
+  }
   my $query = $runstate->{current};
   $query->{servers} = \@ns;
   my ($nameserver) = splice @ns, rand($#ns), 1;
@@ -185,6 +193,10 @@ sub _hints_timeout {
   my $hints = $runstate->{_hints};
   if ( scalar @{ $hints } ) {
      $machine->goto_state( 'hints', '_setup', Net::DNS::Packet->new('.','NS','IN'), splice( @$hints, rand($#{$hints}), 1) );
+  }
+  elsif ( defined $runstate->{nameservers} ) {
+     $machine->goto_state( 'hints', '_init' );
+     return;
   }
   else {
      $machine->goto_state( 'done', '_error', 'Ran out of authority records' );
