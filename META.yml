@@ -3,33 +3,22 @@ abstract: 'A recursive DNS client for POE'
 author:
   - 'Chris Williams <chris@bingosnet.co.uk>'
 build_requires:
-  ExtUtils::MakeMaker: 6.42
   Test::More: 0.47
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
-distribution_type: module
-generated_by: 'Module::Install version 0.88'
+  ExtUtils::MakeMaker: 6.30
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300003, CPAN::Meta::Converter version 2.112621'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: POE-Component-Client-DNS-Recursive
-no_index:
-  directory:
-    - examples
-    - inc
-    - t
-provides:
-  POE::Component::Client::DNS::Recursive:
-    file: lib/POE/Component/Client/DNS/Recursive.pm
-    version: 1.00
 requires:
   Net::DNS::Packet: 0
-  Net::IP: 0
+  Net::IP::Minimal: 0
   POE: 1.004
-  perl: 5.6.0
+  perl: 5.006
 resources:
-  homepage: http://github.com/bingos/poe-component-client-dns-recursive/tree
-  license: http://dev.perl.org/licenses/
-  repository: git://github.com/bingos/poe-component-client-dns-recursive.git
-version: 1.00
+  homepage: https://github.com/bingos/poe-component-client-dns-recursive
+  repository: https://github.com/bingos/poe-component-client-dns-recursive.git
+version: 1.02

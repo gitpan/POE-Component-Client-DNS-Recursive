@@ -1,17 +1,19 @@
 package POE::Component::Client::DNS::Recursive;
+{
+  $POE::Component::Client::DNS::Recursive::VERSION = '1.02';
+}
+
+#ABSTRACT: A recursive DNS client for POE
 
 use strict;
 use warnings;
 use Carp;
 use Socket;
 use File::Spec;
-use Net::IP qw(:PROC);
+use Net::IP::Minimal qw(:PROC);
 use IO::Socket::INET;
 use POE qw(NFA);
 use Net::DNS::Packet;
-use vars qw($VERSION);
-
-$VERSION = '1.00';
 
 my @hc_hints = qw(
 198.41.0.4
@@ -391,35 +393,42 @@ sub _ns_from_cache {
 }
 
 'Recursive lookup, recursive lookup, recursive lookup ....';
+
+
 __END__
+=pod
 
 =head1 NAME
 
 POE::Component::Client::DNS::Recursive - A recursive DNS client for POE
+
+=head1 VERSION
+
+version 1.02
 
 =head1 SYNOPSIS
 
   use strict;
   use warnings;
   use Getopt::Long;
-  
+
   use POE qw(Component::Client::DNS::Recursive);
-  
+
   my $trace;
   GetOptions ('trace' => \$trace);
-  
+
   my $host = shift || die "Nothing to query\n";
   my $type = shift;
-  
+
   POE::Session->create(
     package_states => [
           'main', [qw(_start _response _trace)],
     ],
   );
-  
+
   $poe_kernel->run();
   exit 0;
-  
+
   sub _start {
     POE::Component::Client::DNS::Recursive->resolve(
           event => '_response',
@@ -429,14 +438,14 @@ POE::Component::Client::DNS::Recursive - A recursive DNS client for POE
     );
     return;
   }
-  
+
   sub _trace {
     my $packet = $_[ARG1]->[0];
     return unless $packet;
     print $packet->string;
     return;
   }
-  
+
   sub _response {
     my $packet = $_[ARG0]->{response};
     return unless $packet;
@@ -446,15 +455,15 @@ POE::Component::Client::DNS::Recursive - A recursive DNS client for POE
 
 =head1 DESCRIPTION
 
-POE::Component::Client::DNS::Recursive is a L<POE> component that implements a recursive DNS 
-client. 
+POE::Component::Client::DNS::Recursive is a L<POE> component that implements a recursive DNS
+client.
 
-POE sessions and components can spawn a POE::Component::Client::DNS::Recursive instance to 
+POE sessions and components can spawn a POE::Component::Client::DNS::Recursive instance to
 perform a DNS query. The component will perform its task and return the results to the requesting
 session.
 
 One may also enable tracing of the delegation path from the root name servers
-for the name being looked up. 
+for the name being looked up.
 
 =head1 CONSTRUCTOR
 
@@ -504,8 +513,8 @@ C<ARG0> will contain a hashref with the following fields:
   response => a Net::DNS::Packet object,
   error    => an error message ( if applicable )
 
-C<response> contains a L<Net::DNS::Packet> object on success or undef if the lookup failed. 
-The L<Net::DNS::Packet> object describes the response to the program's request. 
+C<response> contains a L<Net::DNS::Packet> object on success or undef if the lookup failed.
+The L<Net::DNS::Packet> object describes the response to the program's request.
 It may contain several DNS records. Please consult L<Net::DNS> and L<Net::DNS::Packet> for more information.
 
 C<error> contains a description of any error that has occurred. It is only valid if C<response> is undefined.
@@ -518,20 +527,22 @@ C<ARG0> will be a L<Net::DNS::Packet> object.
 
 =back
 
-=head1 AUTHOR
-
-Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
-
-=head1 LICENSE
-
-Copyright E<copy> Chris Williamss.
-
-This module may be used, modified, and distributed under the same terms as Perl itself. Please see the license that came with your Perl distribution for details.
-
 =head1 SEE ALSO
 
 L<POE::Component::Client::DNS>
 
 Perl Programming
 
+=head1 AUTHOR
+
+Chris Williams <chris@bingosnet.co.uk>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Chris Williams.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
+

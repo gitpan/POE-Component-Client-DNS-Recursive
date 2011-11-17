@@ -1,16 +1,55 @@
+
 use strict;
-use inc::Module::Install;
-name 'POE-Component-Client-DNS-Recursive';
-author 'Chris Williams <chris@bingosnet.co.uk>';
-license 'perl';
-auto_license holder => 'Chris Williams';
-version_from 'lib/POE/Component/Client/DNS/Recursive.pm';
-abstract_from 'lib/POE/Component/Client/DNS/Recursive.pm';
-perl_version '5.006';
-build_requires 'Test::More' => 0.47;
-requires 'Net::IP' => 0;
-requires 'Net::DNS::Packet' => 0;
-requires 'POE' => '1.004';
-githubmeta;
-auto_provides;
-WriteAll();
+use warnings;
+
+use 5.006;
+
+use ExtUtils::MakeMaker 6.30;
+
+
+
+my %WriteMakefileArgs = (
+  "ABSTRACT" => "A recursive DNS client for POE",
+  "AUTHOR" => "Chris Williams <chris\@bingosnet.co.uk>",
+  "BUILD_REQUIRES" => {
+    "Test::More" => "0.47"
+  },
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
+  },
+  "DISTNAME" => "POE-Component-Client-DNS-Recursive",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "POE::Component::Client::DNS::Recursive",
+  "PREREQ_PM" => {
+    "Net::DNS::Packet" => 0,
+    "Net::IP::Minimal" => 0,
+    "POE" => "1.004"
+  },
+  "VERSION" => "1.02",
+  "test" => {
+    "TESTS" => "t/*.t"
+  }
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+
