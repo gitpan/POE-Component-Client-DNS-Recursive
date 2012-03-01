@@ -2,7 +2,7 @@ NAME
     POE::Component::Client::DNS::Recursive - A recursive DNS client for POE
 
 VERSION
-    version 1.02
+    version 1.04
 
 SYNOPSIS
       use strict;
@@ -129,7 +129,7 @@ AUTHOR
     Chris Williams <chris@bingosnet.co.uk>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2011 by Chris Williams.
+    This software is copyright (c) 2012 by Chris Williams.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

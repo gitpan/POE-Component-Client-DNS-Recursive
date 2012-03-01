@@ -26,7 +26,7 @@ my %WriteMakefileArgs = (
     "Net::IP::Minimal" => 0,
     "POE" => "1.004"
   },
-  "VERSION" => "1.02",
+  "VERSION" => "1.04",
   "test" => {
     "TESTS" => "t/*.t"
   }
