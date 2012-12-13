@@ -2,7 +2,7 @@ NAME
     POE::Component::Client::DNS::Recursive - A recursive DNS client for POE
 
 VERSION
-    version 1.04
+    version 1.06
 
 SYNOPSIS
       use strict;

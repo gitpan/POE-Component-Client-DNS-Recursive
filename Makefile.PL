@@ -22,11 +22,12 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "POE::Component::Client::DNS::Recursive",
   "PREREQ_PM" => {
+    "Net::DNS" => "0.69",
     "Net::DNS::Packet" => 0,
     "Net::IP::Minimal" => 0,
     "POE" => "1.004"
   },
-  "VERSION" => "1.04",
+  "VERSION" => "1.06",
   "test" => {
     "TESTS" => "t/*.t"
   }

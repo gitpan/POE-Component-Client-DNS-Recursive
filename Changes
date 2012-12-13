@@ -1,4 +1,23 @@
 ==============================
+2012-12-13 12:37:53 +0000 1.06
+==============================
+
+  commit 1bddf1c24e4dfaeb62b688e00d85b4a32828aa17
+  Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+  Date:   Thu Dec 13 12:33:21 2012 +0000
+  
+    Resolve issue with API change in Net::DNS::Packet
+
+    0.68_01 of Net::DNS changed the API for passing a scalar ref to
+    Net::DNS::Packet->new().
+
+    Errors are now in $@ and the length is in the second returned value.
+
+    At least passing a false value as the second parameter actually
+    surpresses debug output now, so removed the hacks to shut that shit
+    up. 
+
+==============================
 2012-03-01 00:26:14 +0000 1.04
 ==============================
 
