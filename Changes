@@ -1,11 +1,25 @@
-==============================
-2012-12-13 12:37:53 +0000 1.06
-==============================
+==================================================
+Changes from 2009-06-04 00:00:00 +0000 to present.
+==================================================
 
-  commit 1bddf1c24e4dfaeb62b688e00d85b4a32828aa17
+-----------------------------------------
+version 1.08 at 2014-06-03 13:56:03 +0000
+-----------------------------------------
+
+  Change: 2c2e43580f6799121bf843b927adc7e2ef0a134a
   Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
-  Date:   Thu Dec 13 12:33:21 2012 +0000
-  
+  Date : 2014-06-03 14:56:03 +0000
+
+    Added IPv6 support (hopefully) 
+
+-----------------------------------------
+version 1.06 at 2012-12-13 12:37:53 +0000
+-----------------------------------------
+
+  Change: 1bddf1c24e4dfaeb62b688e00d85b4a32828aa17
+  Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
+  Date : 2012-12-13 12:37:53 +0000
+
     Resolve issue with API change in Net::DNS::Packet
 
     0.68_01 of Net::DNS changed the API for passing a scalar ref to
@@ -17,113 +31,26 @@
     surpresses debug output now, so removed the hacks to shut that shit
     up. 
 
-==============================
-2012-03-01 00:26:14 +0000 1.04
-==============================
+-----------------------------------------
+version 1.04 at 2012-03-01 00:26:14 +0000
+-----------------------------------------
 
-  commit 56a8019ed2a1212bba9f1fc4fc1e8771aae0af9f
+  Change: 56a8019ed2a1212bba9f1fc4fc1e8771aae0af9f
   Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
-  Date:   Thu Mar 1 00:26:14 2012 +0000
-  
+  Date : 2012-03-01 00:26:14 +0000
+
     Resolve spurious warnings in consumer modules 
 
-==============================
-2011-11-17 23:05:37 +0000 1.02
-==============================
+-----------------------------------------
+version 1.02 at 2011-11-17 23:05:37 +0000
+-----------------------------------------
 
-  commit 8550f09a0bb3e6e92b4c7583ad39f8614c6a7a80
+  Change: 8550f09a0bb3e6e92b4c7583ad39f8614c6a7a80
   Author: Chris 'BinGOs' Williams <chris@bingosnet.co.uk>
-  Date:   Thu Nov 17 23:05:37 2011 +0000
-  
+  Date : 2011-11-17 23:05:37 +0000
+
     Change to dzil, use Net::IP::Minimal instead of Net::IP 
 
-==============================
-2009-05-18 22:43:56 +0100 1.00
-==============================
-
-  commit fa61e8d651a5203bf5974c8f2637199b4a0b5af0
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Mon May 18 22:43:56 2009 +0100
-  
-    Updated documentation to mention postbacks
-
-  commit 5795d90656ec9b401eed4a9848ba72476ac9a33f
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Mon May 18 22:34:06 2009 +0100
-  
-    Added postbacks for event and trace. Updated makefile.PL 
-
-==============================
-2009-04-15 23:46:46 +0100 0.12
-==============================
-
-  commit 0bde21cbe9381122d417301b53918337f8224605
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Wed Apr 15 23:46:46 2009 +0100
-  
-    Bump version for release
-
-  commit b846722bcbfc5bf4e10ba1a71dbd3f7f3033c7ea
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Wed Apr 15 23:33:34 2009 +0100
-  
-    Looks like I got to the root of the problems with 'nameservers'
-    parameter
-
-  commit 9dec8c9410b3eedb026283c746f04061ba7351e4
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Wed Apr 15 22:24:58 2009 +0100
-  
-    Some updates to try and track down issues with nameservers 
-
-==============================
-2009-04-15 15:37:32 +0100 0.10
-==============================
-
-  commit 26c1d09fa591b8fbf80e2cfa54157405be85da20
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Wed Apr 15 15:37:32 2009 +0100
-  
-    The 'host' and 'event' parameters weren't mandatory, made them so. 
-
-==============================
-2009-04-09 12:44:23 +0100 0.08
-==============================
-
-  commit 520f2ddcbc87a44d71bc089f426bc12b7079557a
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Thu Apr 9 12:44:23 2009 +0100
-  
-    Fixed some issues with only one nameserver being specified. Resolved
-    issues with select not being removed on the socket. 
-
-==============================
-2009-04-08 09:04:42 +0100 0.06
-==============================
-
-  commit 3c38d13d213286bc805f7a5db76140280731439c
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Wed Apr 8 09:04:42 2009 +0100
-  
-    Make auto_set_repository() only run at author-time. Better error
-    checking for when we can't make a socket address 
-
-==============================
-2009-04-06 14:41:30 +0100 0.04
-==============================
-
-  commit fa86de6fe321379b060a0a02809fd5c7695d23bf
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Mon Apr 6 14:41:30 2009 +0100
-  
-    Added some diagnostics to the test that CPAN Testers are failing on
-
-  commit 66b5be5cc8d2b808f1423347dd30fb0f52e9cb67
-  Author: Chris Williams <chris@bingosnet.co.uk>
-  Date:   Thu Apr 2 22:01:42 2009 +0100
-  
-    Forgot the MANIFEST 
-
-====================================
-End of changes in the last 1825 days
-====================================
+================================================
+Plus 7 releases after 2009-06-04 00:00:00 +0000.
+================================================
